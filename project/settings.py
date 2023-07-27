@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'registration',
     'product',
     'comment',
-    'history_orders',
+    'likes',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hackaton',
-        'USER': 'darinaibragimova',
+        'USER': 'alina',
         'PASSWORD': '1',
         'HOST': '127.0.0.1',
         'PORT': '5432'
@@ -162,3 +163,8 @@ EMAIL_HOST_PASSWORD = 'lxdlwbubuykzarrx'
 TWILIO_SID='AC3484c5eacb24b9534481d8e88b20e55f'
 TWILIO_AUTH_TOKEN='f63a889b7c69292423fbbe84fd500855'
 TWILIO_SENDER_PHONE='+14322958274'
+
+CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_RESULT_BACKEND = 'rpc://'
+
+CART_SESSION_ID = 'cart'

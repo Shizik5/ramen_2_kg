@@ -2,6 +2,7 @@ from rest_framework import permissions, viewsets
 from .models import Category, Product, CartItem
 from .permissions import IsAuthorOrAdmin, IsAuthor
 from .serializers import CategorySerializer, ProductSerializer, CartItemSerializer
+from rest_framework import generics
 
 
 class CategoryAPIView(viewsets.ModelViewSet):
@@ -39,5 +40,9 @@ class CartListAPIView(viewsets.ModelViewSet):
         return (permissions.AllowAny(),)
 
 
+class ProductFilterListAPIView(generics.ListAPIView):
+    serializer_class = ProductSerializer
 
-
+    def get_queryset(self):
+        category = self.kwargs['category']
+        return Product.objects.filter(product__category=category)
