@@ -1,7 +1,8 @@
 from rest_framework import permissions, viewsets
-from .models import Category, Product, CartItem
+import django_filters.rest_framework
+from .models import Category, Product, CartItem, Filter
 from .permissions import IsAuthorOrAdmin, IsAuthor
-from .serializers import CategorySerializer, ProductSerializer, CartItemSerializer
+from .serializers import CategorySerializer, ProductSerializer, CartItemSerializer, ProductFilterSerializer, FilterSerializer
 from rest_framework import generics
 
 
@@ -39,10 +40,23 @@ class CartListAPIView(viewsets.ModelViewSet):
             return (IsAuthor(),)
         return (permissions.AllowAny(),)
 
+#
+# class ProductFilterListAPIView(viewsets.ModelViewSet):
+#     queryset = Product.objects.filter(category_id=1)
+#
+#     # def get_queryset(self):
+#     #     category = self.kwargs['category']
+#     #     return Product.objects.filter(product_category=category)
+#
+#     serializer_class = ProductFilterSerializer
 
-class ProductFilterListAPIView(generics.ListAPIView):
-    serializer_class = ProductSerializer
+class ProductFilterListAPIView(viewsets.ModelViewSet):
+    queryset = Filter.objects.all()
+    serializer_class = FilterSerializer
 
     def get_queryset(self):
-        category = self.kwargs['category']
-        return Product.objects.filter(product__category=category)
+        queryset = super().get_queryset()
+        category_id = self.request.query_params.get('category_id')
+        if category_id is not None:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset

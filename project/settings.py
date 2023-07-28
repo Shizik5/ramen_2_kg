@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'comment',
     'likes',
     'order',
+    'rating'
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,7 @@ CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_RESULT_BACKEND = 'rpc://'
 
 CART_SESSION_ID = 'cart'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

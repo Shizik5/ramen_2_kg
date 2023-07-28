@@ -42,5 +42,6 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/', include('product.urls')),
     path('order/', include('order.urls')),
+    path('api/<int:id>/', include('rating.urls')),
 ]
 

@@ -23,12 +23,23 @@ class Product(models.Model):
 
 
     def __str__(self):
-        return f' ваш товар {self.category} - {self.title}'
+        return f' ваш товар {self.category} - {self.title} - {self.price}'
 
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
 
+class Filter(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return f' ваш товар {self.category} - {self.title}'
+
+    class Meta:
+        verbose_name = 'Фильтр'
+        verbose_name_plural = 'Фильтры'
 
 class CartItem(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
