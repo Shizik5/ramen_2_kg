@@ -46,11 +46,11 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     total_price = models.PositiveIntegerField(default=0)
-
-    def save(self, *args, **kwargs):
-        # Calculate the total price based on product price and quantity
-        self.total_price = self.product.price * self.quantity
-        super().save(*args, **kwargs)
+    #
+    # def save(self, *args, **kwargs):
+    #     # Calculate the total price based on product price and quantity
+    #     self.total_price = self.product.price * self.quantity
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user} - {self.product.category} { self.product.title} " \

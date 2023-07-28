@@ -22,3 +22,7 @@ gunicorn
 whitenoise
 celery
 django-filter
+telebot
+drf-api-logger
+django-redis
+django_redis
