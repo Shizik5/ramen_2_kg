@@ -1,9 +1,10 @@
 from rest_framework import serializers
-from .models import Like, Favorite
+from .models import *
 
 class LikeSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.id')
     user_username = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Like
         fields = '__all__'
@@ -18,16 +19,19 @@ class LikeSerializer(serializers.ModelSerializer):
             )
         return attrs
 
+
 class LikedUserSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.id')
     user_username = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Like
         fields = ['user', 'user_username']
 
+
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Favorite
+        model = Favorites
         fields = ('id', 'product')
 
     def to_representation(self, instance):

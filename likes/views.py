@@ -3,8 +3,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, permissions
 from rest_framework.filters import SearchFilter
 
-from .models import Like
-from .serializers import LikeSerializer, RecomendSerializer
+from .models import Like , Favorites
+from .serializers import LikeSerializer, FavoriteSerializer
 from product.permissions import IsAuthor
 from rest_framework.pagination import PageNumberPagination
 
@@ -17,8 +17,9 @@ class StandartResultPagination (PageNumberPagination):
     page_query_param = 'page'
 
 
-class LikeCreateView(generics.CreateAPIView):
-    permission_classes = (permissions.IsAuthenticated, IsAuthor)
+class LikeCreateView(ModelViewSet):
+    queryset = Like.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = LikeSerializer
 
     def perform_create(self, serializer):
@@ -28,6 +29,10 @@ class LileDeleteView(generics.DestroyAPIView):
     queryset = Like.objects.all()
     permission_classes = (permissions.IsAuthenticated, IsAuthor)
     lookup_field = 'id'
+
+class FavoriteAPIView(ModelViewSet):
+    queryset = Favorites.objects.all()
+    serializer_class = FavoriteSerializer
 
 # class RecomendView(generics.CreateAPIView):
 #     queryset = Recomend.objects.all()

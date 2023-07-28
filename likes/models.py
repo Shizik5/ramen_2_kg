@@ -4,7 +4,7 @@ from registration.models import CustomUser
 from project import settings
 # Create your models here.
 class Like(models.Model):
-    post = models.ForeignKey(Product, related_name='likes', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='likes', on_delete=models.CASCADE)
     owner = models.ForeignKey(CustomUser, related_name='likes', on_delete=models.CASCADE)
 
 

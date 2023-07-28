@@ -35,13 +35,14 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/register/', include('registration.urls')),
-    path('api/reset_password/', include('registration.urls')),
-    path('api/product/', include('product.urls')),
-    path('api/product/comment/', include('comment.urls')),
+    # path('api/register/', include('registration.urls')),
+    # path('api/', include('registration.urls')),
+    path('api/product/', include('product.urls'))   ,
+    # path('api/product/comment/', include('comment.urls')),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('api/', include('product.urls')),
+    # path('api/', include('product.urls')),
     path('order/', include('order.urls')),
     path('api/<int:id>/', include('rating.urls')),
+    # path('api/', include('likes.urls'))
 ]
 

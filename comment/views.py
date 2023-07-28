@@ -7,14 +7,14 @@ from comment.tasks import send_new_comment_email
 # Create your views here.
 
 
-class CommentCreateView(generics.CreateAPIView):
-    serializer_class = CommentSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-        comment = serializer.save(owner=self.request.user)
-        send_new_comment_email.delay(comment.id)
+# class CommentCreateView(generics.CreateAPIView):
+#     serializer_class = CommentSerializer
+#     permission_classes = (permissions.IsAuthenticated,)
+#
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
+#         comment = serializer.save(owner=self.request.user)
+#         send_new_comment_email.delay(comment.id)
 
 
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
