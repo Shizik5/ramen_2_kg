@@ -40,17 +40,17 @@ class FavoriteSerializer(serializers.ModelSerializer):
             representation['product_preview'] = None
         return representation
 
-class RecomendSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Recomend
-        fields = ('id', 'product')
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['product_title'] = instance.product.title
-        if instance.product.preview:
-            preview = instance.product.preview
-            representation['product_preview'] = preview.url
-        else:
-            representation['product_preview'] = None
-        return representation
+# class RecomendSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Recomend
+#         fields = ('id', 'product')
+#
+#     def to_representation(self, instance):
+#         representation = super().to_representation(instance)
+#         representation['product_title'] = instance.product.title
+#         if instance.product.preview:
+#             preview = instance.product.preview
+#             representation['product_preview'] = preview.url
+#         else:
+#             representation['product_preview'] = None
+#         return representation
