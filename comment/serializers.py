@@ -13,7 +13,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         product = self.context.get('product')
-        product = Product.objects.get(pk=product)
+        product = Product.objects.get(id=product.id)
         owner = self.context.get('owner')
         validated_data['owner'] = owner
         validated_data['product'] = product

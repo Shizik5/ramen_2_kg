@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'twilio',
     'drf_api_logger',
     'django_redis',
+    'django_celery_results',
 
     #MYAPPS
     'registration',
@@ -177,13 +178,6 @@ CART_SESSION_ID = 'cart'
 
 TELEGRAM_BOT_API_KEY='6484579916:AAFbUo4a1u2GVm81OIIflpz7E4c0u9QFdJE'
 
-
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
-CELERY_TIMEZONE = "Bishkek/Asia"
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
 
 
 DRF_API_LOGGER_DATABASE = True

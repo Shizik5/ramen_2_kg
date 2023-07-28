@@ -1,14 +1,18 @@
-from celery import shared_task
 from django.core.mail import send_mail
-from .models import Comment
+from project.celery import app
+from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
+from datetime import datetime
+from drf_api_logger.models import APILogsModel
+from comment.models import Comment
 
-@shared_task()
-def send_new_comment_email(comment_id):
+
+@app.task(bind=True)
+def send_new_comment_email(self, comment_id):
     comment = Comment.objects.get(pk=comment_id)
 
     subject = 'New Comment on Your Post'
-    message = f'Hi {comment.post.owner},\n\nYou have a new comment on your post: "{comment.body}"\n\nBest regards,\nYour Website Team'
+    message = f'Hi \n\nYou have a new comment on your post: "{comment.body}"\n\nBest regards,\nYour Website Team'
     from_email = 'sadyr.top@gmail.com'
-    recipient_list = [comment.post.owner.email]
+    recipient_list = ['dastan12151@gmail.com']
 
-    send_mail(subject, message, from_email, recipient_list)
+    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
